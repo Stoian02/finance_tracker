@@ -129,12 +129,28 @@ export function ExpenseForm({ onSuccess, initialData, onCancel }: ExpenseFormPro
             onValueChange={(value) => setFormData({ ...formData, categoryId: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select category" />
+              <SelectValue placeholder="Select category">
+                {formData.categoryId && categories.find(c => c?.id === formData.categoryId) && (
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="w-3 h-3 rounded-full"
+                      style={{ backgroundColor: categories.find(c => c?.id === formData.categoryId)?.color ?? '#3B82F6' }}
+                    />
+                    <span>{categories.find(c => c?.id === formData.categoryId)?.name ?? 'Unknown'}</span>
+                  </div>
+                )}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {categories?.map?.((category) => (
                 <SelectItem key={category?.id} value={category?.id ?? ''}>
-                  {category?.name ?? 'Unknown'}
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="w-3 h-3 rounded-full"
+                      style={{ backgroundColor: category?.color ?? '#3B82F6' }}
+                    />
+                    <span>{category?.name ?? 'Unknown'}</span>
+                  </div>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -170,7 +186,7 @@ export function ExpenseForm({ onSuccess, initialData, onCancel }: ExpenseFormPro
             Cancel
           </Button>
         )}
-        <Button type="submit" disabled={loading} className="bg-blue-600 hover:bg-blue-700">
+        <Button type="submit" disabled={loading} className="bg-blue-600 hover:bg-blue-700 text-white">
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : initialData ? (

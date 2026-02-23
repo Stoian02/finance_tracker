@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
-import { Loader2, DollarSign } from 'lucide-react'
+import { Loader2, Euro } from 'lucide-react'
 
 interface IncomeFormProps {
   selectedMonth: Date
@@ -95,7 +95,7 @@ export function IncomeForm({ selectedMonth, onSuccess }: IncomeFormProps) {
       <div className="space-y-2">
         <Label htmlFor="income">Monthly Income / Salary</Label>
         <div className="relative">
-          <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <Euro className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500" />
           <Input
             id="income"
             type="number"
@@ -107,7 +107,7 @@ export function IncomeForm({ selectedMonth, onSuccess }: IncomeFormProps) {
             required
           />
         </div>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {existingIncome
             ? 'Update your income for this month'
             : 'Set your income for this month'}
@@ -117,7 +117,7 @@ export function IncomeForm({ selectedMonth, onSuccess }: IncomeFormProps) {
       <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-green-600 hover:bg-green-700"
+        className="w-full bg-green-600 hover:bg-green-700 text-white"
       >
         {loading ? (
           <Loader2 className="h-4 w-4 animate-spin" />

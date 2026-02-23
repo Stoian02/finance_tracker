@@ -145,7 +145,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
   return (
     <div className="space-y-6">
       {/* Add New Category Form */}
-      <form onSubmit={handleAddCategory} className="space-y-4 p-4 bg-gray-50 rounded-lg">
+      <form onSubmit={handleAddCategory} className="space-y-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
         <h3 className="font-semibold text-lg">Add Custom Category</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2 md:col-span-2">
@@ -172,7 +172,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
                   <button
                     key={color}
                     type="button"
-                    className="w-6 h-6 rounded-full border-2 border-gray-300 hover:border-gray-500"
+                    className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 hover:border-gray-500 dark:hover:border-gray-400"
                     style={{ backgroundColor: color }}
                     onClick={() => setNewCategory({ ...newCategory, color })}
                   />
@@ -181,7 +181,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
             </div>
           </div>
         </div>
-        <Button type="submit" disabled={addingCategory} className="bg-blue-600 hover:bg-blue-700">
+        <Button type="submit" disabled={addingCategory} className="bg-blue-600 hover:bg-blue-700 text-white">
           {addingCategory ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
@@ -200,7 +200,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
           {categories?.map?.((category) => (
             <div
               key={category?.id}
-              className="flex items-center justify-between p-3 rounded-lg border hover:shadow-md transition-shadow"
+              className="flex items-center justify-between p-3 rounded-lg border dark:border-gray-700 hover:shadow-md transition-shadow"
               style={{ borderLeftWidth: '4px', borderLeftColor: category?.color ?? '#3B82F6' }}
             >
               <div className="flex items-center gap-2">
@@ -210,7 +210,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
                 />
                 <span className="font-medium">{category?.name ?? 'Unknown'}</span>
                 {!category?.isCustom && (
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
                     Default
                   </span>
                 )}
@@ -220,7 +220,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
                   variant="ghost"
                   size="icon"
                   onClick={() => setDeletingCategory(category)}
-                  className="hover:bg-red-50 hover:text-red-600"
+                  className="hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30 dark:hover:text-red-400"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -243,7 +243,7 @@ export function CategoryManager({ onUpdate }: CategoryManagerProps) {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteCategory}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-red-600 hover:bg-red-700 text-white"
             >
               Delete
             </AlertDialogAction>

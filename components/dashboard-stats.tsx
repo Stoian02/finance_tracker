@@ -65,25 +65,25 @@ export function DashboardStats({ selectedMonth, refreshKey }: DashboardStatsProp
       title: 'Total Income',
       value: stats?.totalIncome ?? 0,
       icon: TrendingUp,
-      color: 'text-green-600',
-      bg: 'bg-green-50',
-      iconBg: 'bg-green-100',
+      color: 'text-green-600 dark:text-green-400',
+      bg: 'bg-green-50 dark:bg-green-900/20',
+      iconBg: 'bg-green-100 dark:bg-green-800/30',
     },
     {
       title: 'Total Expenses',
       value: stats?.totalExpenses ?? 0,
       icon: TrendingDown,
-      color: 'text-red-600',
-      bg: 'bg-red-50',
-      iconBg: 'bg-red-100',
+      color: 'text-red-600 dark:text-red-400',
+      bg: 'bg-red-50 dark:bg-red-900/20',
+      iconBg: 'bg-red-100 dark:bg-red-800/30',
     },
     {
       title: 'Balance',
       value: stats?.balance ?? 0,
       icon: Wallet,
-      color: (stats?.balance ?? 0) >= 0 ? 'text-blue-600' : 'text-orange-600',
-      bg: (stats?.balance ?? 0) >= 0 ? 'bg-blue-50' : 'bg-orange-50',
-      iconBg: (stats?.balance ?? 0) >= 0 ? 'bg-blue-100' : 'bg-orange-100',
+      color: (stats?.balance ?? 0) >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-orange-600 dark:text-orange-400',
+      bg: (stats?.balance ?? 0) >= 0 ? 'bg-blue-50 dark:bg-blue-900/20' : 'bg-orange-50 dark:bg-orange-900/20',
+      iconBg: (stats?.balance ?? 0) >= 0 ? 'bg-blue-100 dark:bg-blue-800/30' : 'bg-orange-100 dark:bg-orange-800/30',
     },
   ]
 
@@ -99,9 +99,9 @@ export function DashboardStats({ selectedMonth, refreshKey }: DashboardStatsProp
           <Card className={`p-6 ${stat.bg} border-none shadow-md hover:shadow-lg transition-shadow`}>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">{stat.title}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">{stat.title}</p>
                 <p className={`text-3xl font-bold ${stat.color}`}>
-                  ${loading ? '...' : stat.value.toFixed(2)}
+                  €{loading ? '...' : stat.value.toFixed(2)}
                 </p>
               </div>
               <div className={`${stat.iconBg} p-3 rounded-full`}>

@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card'
 import { TrendingUp } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+import { useTheme } from 'next-themes'
+import { getChartColors, getTooltipStyles } from '@/lib/theme-colors'
 import {
   ResponsiveContainer,
   BarChart,
@@ -29,10 +31,14 @@ export function ExpenseTrendChartInner({
   categoryColors,
   toggleCategory,
 }: ExpenseTrendChartInnerProps) {
+  const { theme } = useTheme()
+  const chartColors = getChartColors(theme)
+  const tooltipStyles = getTooltipStyles(theme)
+  
   if (!data || data.length === 0) {
     return (
       <Card className="p-6 shadow-md">
-        <div className="flex flex-col items-center justify-center h-80 text-gray-500">
+        <div className="flex flex-col items-center justify-center h-80 text-gray-500 dark:text-gray-400">
           <TrendingUp className="h-12 w-12 mb-2" />
           <p>No expense trends for this month</p>
         </div>
@@ -43,7 +49,7 @@ export function ExpenseTrendChartInner({
   return (
     <Card className="p-6 shadow-md">
       <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <TrendingUp className="h-5 w-5 text-blue-600" />
+        <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400" />
         Daily Expense Trends
       </h3>
 
@@ -54,32 +60,40 @@ export function ExpenseTrendChartInner({
         >
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 10 }}
+            tick={{ fontSize: 10, fill: chartColors.axes }}
             tickLine={false}
             label={{
               value: 'Date',
               position: 'insideBottom',
               offset: -15,
-              style: { textAnchor: 'middle', fontSize: 11 },
+              style: { textAnchor: 'middle', fontSize: 11, fill: chartColors.axes },
             }}
           />
           <YAxis
-            tick={{ fontSize: 10 }}
+            tick={{ fontSize: 10, fill: chartColors.axes }}
             tickLine={false}
             label={{
-              value: 'Amount ($)',
+              value: 'Amount (€)',
               angle: -90,
               position: 'insideLeft',
-              style: { textAnchor: 'middle', fontSize: 11 },
+              style: { textAnchor: 'middle', fontSize: 11, fill: chartColors.axes },
             }}
           />
           <Tooltip
-            formatter={(value: any) => `$${value?.toFixed?.(2) ?? '0.00'}`}
-            contentStyle={{ fontSize: 11 }}
+            formatter={(value: any) => `€${value?.toFixed?.(2) ?? '0.00'}`}
+            contentStyle={{ 
+              fontSize: 11, 
+              ...tooltipStyles,
+              borderRadius: '6px',
+              padding: '8px 12px'
+            }}
+            itemStyle={{ color: tooltipStyles.color }}
+            labelStyle={{ color: tooltipStyles.color, fontWeight: 'bold' }}
           />
           <Legend
             verticalAlign="top"
             wrapperStyle={{ fontSize: 11 }}
+            formatter={(value: string) => <span style={{ color: chartColors.legend }}>{value}</span>}
           />
           {categories
             ?.filter?.((cat) => visibleCategories.has(cat))
@@ -95,7 +109,7 @@ export function ExpenseTrendChartInner({
       </ResponsiveContainer>
 
       {/* Category Filters */}
-      <div className="mt-6 border-t pt-4">
+      <div className="mt-6 border-t dark:border-gray-700 pt-4">
         <p className="text-sm font-medium mb-3">Filter Categories:</p>
         <div className="grid grid-cols-2 gap-2">
           {categories?.map?.((category) => (

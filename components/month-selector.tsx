@@ -25,18 +25,18 @@ export function MonthSelector({ selectedMonth, onMonthChange }: MonthSelectorPro
   const isCurrentMonth = format(selectedMonth, 'yyyy-MM') === format(new Date(), 'yyyy-MM')
 
   return (
-    <div className="flex items-center justify-between bg-white rounded-lg shadow-md p-4">
+    <div className="flex items-center justify-between bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
       <Button
         variant="outline"
         size="icon"
         onClick={handlePrevMonth}
-        className="hover:bg-blue-50 hover:text-blue-600 transition-colors"
+        className="hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
       >
         <ChevronLeft className="h-5 w-5" />
       </Button>
 
       <div className="flex items-center gap-3">
-        <Calendar className="h-5 w-5 text-blue-600" />
+        <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
         <span className="text-xl font-semibold">
           {format(selectedMonth, 'MMMM yyyy')}
         </span>
@@ -45,7 +45,7 @@ export function MonthSelector({ selectedMonth, onMonthChange }: MonthSelectorPro
             variant="ghost"
             size="sm"
             onClick={handleCurrentMonth}
-            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-900/30"
           >
             Today
           </Button>
@@ -56,7 +56,7 @@ export function MonthSelector({ selectedMonth, onMonthChange }: MonthSelectorPro
         variant="outline"
         size="icon"
         onClick={handleNextMonth}
-        className="hover:bg-blue-50 hover:text-blue-600 transition-colors"
+        className="hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-colors"
       >
         <ChevronRight className="h-5 w-5" />
       </Button>
